@@ -6,16 +6,15 @@ from json2html import *
 import json
 
 f = open('./validation-dashboard/result.json', encoding='utf-8')
-  
+
 infoFromJson = json.load(f)
 build_direction = "LEFT_TO_RIGHT"
 table_attributes = {"style": "width:100%"}
 table = json2html.convert(json = infoFromJson)
-f = open( 'docs/validation-result.html', 'w' )
-f.write( table )
-f.close()
-f = open('docs/validation-result.html', 'a')  
-f.write("""<link rel="stylesheet" href="validation-result.css" type="text/css" media="all">
+with open( 'docs/validation-result.html', 'w' ) as f:
+    f.write( table )
+with open('docs/validation-result.html', 'a') as f:
+    f.write("""<link rel="stylesheet" href="validation-result.css" type="text/css" media="all">
            <script>
             window.onload = function color() {
                 var value = document.getElementsByTagName("td");
@@ -34,4 +33,3 @@ f.write("""<link rel="stylesheet" href="validation-result.css" type="text/css" m
             </script>
             <p> Note : These are the <a href="https://github.com/Azure/actions/blob/main/docs/validations-action-repo.md"> validations </a> against which the action repositories are tested. </p>
          """)
-f.close()
